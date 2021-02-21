@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokedex/models/Move.dart';
 
@@ -23,6 +21,15 @@ void main() {
     expect(poke.moves, isNull);
     expect(poke.types, isNull);
     expect(poke.species, isNull);
+  });
+
+  test('Pokemon service can get raw pokemon by url', () async {
+    var service = PokemonService.getInstance();
+
+    Map poke =
+        await service.getRawPokemon("https://pokeapi.co/api/v2/pokemon/1");
+
+    expect(poke['name'], "bulbasaur");
   });
 
   test('Move service can get moves object', () async {

@@ -41,4 +41,10 @@ class Move {
     _priority = json['priority'];
     _power = json['power'];
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return _name;
+  }
 }

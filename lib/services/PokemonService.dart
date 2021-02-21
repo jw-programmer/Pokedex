@@ -11,7 +11,12 @@ class PokemonService {
   PokemonService._internal();
 
   Future<Pokemon> getPokemon(String url) async {
-    Response response = await Dio().get(url);
-    return Pokemon.fromJson(response.data);
+    return await Dio()
+        .get(url)
+        .then((Response response) => Pokemon.fromJson(response.data));
+  }
+
+  Future<Map<String, dynamic>> getRawPokemon(String url) async {
+    return await Dio().get(url).then((Response response) => response.data);
   }
 }
