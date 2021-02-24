@@ -35,10 +35,10 @@ void main() {
   test('Pokemon service can get default sprite by url', () async {
     var service = PokemonService.getInstance();
 
-    String photo_url =
+    String photoUrl =
         await service.getPhotoPokemon("https://pokeapi.co/api/v2/pokemon/1");
 
-    expect(photo_url,
+    expect(photoUrl,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
   });
 
