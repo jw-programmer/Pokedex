@@ -2,7 +2,7 @@ class Move {
   int _id;
   String _name;
   int _accuracy;
-  Null _effectChance;
+  dynamic _effectChance;
   int _pp;
   int _priority;
   int _power;
@@ -11,7 +11,7 @@ class Move {
       {int id,
       String name,
       int accuracy,
-      Null effectChance,
+      dynamic effectChance,
       int pp,
       int priority,
       int power}) {

@@ -5,11 +5,11 @@ class IPokemonBuilder {
     return null;
   }
 
-  void buildMoves() async {}
+  Future<void> buildMoves() async {}
 
-  void buildTypes() async {}
+  Future<void> buildTypes() async {}
 
-  void buildSpecies() async {}
+  Future<void> buildSpecies() async {}
 
   Pokemon returnBuldPokemon() {
     return null;

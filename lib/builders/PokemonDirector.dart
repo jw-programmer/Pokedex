@@ -2,11 +2,12 @@ import 'package:pokedex/interfaces/IPokemonBuilder.dart';
 import 'package:pokedex/models/Pokemon.dart';
 
 class PokemonDirector {
-  Future<Pokemon> buildApiPokemom(IPokemonBuilder builder, String url) async {
+  static Future<Pokemon> buildApiPokemom(
+      IPokemonBuilder builder, String url) async {
     await builder.buildPokemon(url);
-    builder.buildMoves();
-    builder.buildTypes();
-    builder.buildSpecies();
+    await builder.buildMoves();
+    await builder.buildTypes();
+    await builder.buildSpecies();
 
     return builder.returnBuldPokemon();
   }

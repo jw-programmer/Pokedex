@@ -29,45 +29,46 @@ class PokemonApiBuilder implements IPokemonBuilder {
     return this._result;
   }
 
-  Future<Map<String, dynamic>> _requestRawPokemom() async {
-    print("Eu peço os dados crus");
-    return await _pokeService
-        .getRawPokemon("https://pokeapi.co/api/v2/pokemon/${_result.id}");
-  }
-
-  @override
-  void buildMoves() async {
+  //Devido a forma como o dar trata eventos assincronos, essa é a melhor soução para o problema.
+  Future<List<Move>> _requestBuildMovesAsync() async {
     List<Move> moves = List();
-    print(_result.name);
-    Map<String, dynamic> raw = await _requestRawPokemom()
-        .then((Map<String, dynamic> full) => full['moves']);
-    raw.forEach((k, y) async {
-      print("Chego no for");
-      if (k == "move") {
-        Move move = await _moveService.getMove(y['url']);
-        moves.add(move);
-      }
-    });
-    _result.moves = moves;
+    List<dynamic> rmoves = await _pokeService
+        .getRawPokemon("https://pokeapi.co/api/v2/pokemon/${_result.id}")
+        .then((var full) => full['moves']);
+    for (var rawmove in rmoves) {
+      Move move = await _moveService.getMove(rawmove['move']['url']);
+      moves.add(move);
+    }
+    return moves;
   }
 
   @override
-  void buildTypes() async {
+  Future<void> buildMoves() async {
+    this._result.moves = await _requestBuildMovesAsync();
+  }
+
+  Future<List<Type>> _requestTypesAsync() async {
     List<Type> types = List();
-    Map<String, dynamic> raw =
-        await _requestRawPokemom().then((full) => full['types']);
-    raw.forEach((k, v) async {
-      if (k == "type") {
-        Type type = await _typeService.getType(v['url']);
-        types.add(type);
-      }
-    });
-    _result.types = types;
+    List<dynamic> rtypes = await _pokeService
+        .getRawPokemon("https://pokeapi.co/api/v2/pokemon/${_result.id}")
+        .then((var full) => full['types']);
+    for (var rawtype in rtypes) {
+      Type type = await _typeService.getType(rawtype['type']['url']);
+      types.add(type);
+    }
+    return types;
   }
 
   @override
-  void buildSpecies() async {
-    String url = await _requestRawPokemom().then((full) => full['url']);
+  Future<void> buildTypes() async {
+    this._result.types = await _requestTypesAsync();
+  }
+
+  @override
+  Future<void> buildSpecies() async {
+    String url = await _pokeService
+        .getRawPokemon("https://pokeapi.co/api/v2/pokemon/${_result.id}")
+        .then((var raw) => raw['species']['url']);
     Specie specie = await _specieService.getSpecie(url);
     _result.species = specie;
   }
