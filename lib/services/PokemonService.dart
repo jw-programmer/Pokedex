@@ -19,4 +19,9 @@ class PokemonService {
   Future<Map<String, dynamic>> getRawPokemon(String url) async {
     return await Dio().get(url).then((Response response) => response.data);
   }
+
+  Future<String> getPhotoPokemon(String url) async {
+    return await getPokemon(url)
+        .then((pokemon) => pokemon.sprites.frontDefault);
+  }
 }

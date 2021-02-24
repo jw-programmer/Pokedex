@@ -32,6 +32,16 @@ void main() {
     expect(poke['name'], "bulbasaur");
   });
 
+  test('Pokemon service can get default sprite by url', () async {
+    var service = PokemonService.getInstance();
+
+    String photo_url =
+        await service.getPhotoPokemon("https://pokeapi.co/api/v2/pokemon/1");
+
+    expect(photo_url,
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
+  });
+
   test('Move service can get moves object', () async {
     var service = MoveService.getInstance();
 
