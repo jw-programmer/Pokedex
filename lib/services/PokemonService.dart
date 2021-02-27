@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex/models/Page.dart';
 import 'package:pokedex/models/Pokemon.dart';
 
 class PokemonService {
@@ -18,6 +19,12 @@ class PokemonService {
 
   Future<Map<String, dynamic>> getRawPokemon(String url) async {
     return await Dio().get(url).then((Response response) => response.data);
+  }
+
+  Future<Page> getPaginateResults(String url) async {
+    return await Dio()
+        .get(url)
+        .then((Response response) => Page.fromJson(response.data));
   }
 
   Future<String> getPhotoPokemon(String url) async {

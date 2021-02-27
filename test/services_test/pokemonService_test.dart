@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokedex/models/Move.dart';
+import 'package:pokedex/models/Page.dart';
 
 import 'package:pokedex/models/Pokemon.dart';
 import 'package:pokedex/models/Specie.dart';
@@ -21,6 +22,19 @@ void main() {
     expect(poke.moves, isNull);
     expect(poke.types, isNull);
     expect(poke.species, isNull);
+  });
+
+  test("Pokemon service can feth a page of results", () async {
+    var service = PokemonService.getInstance();
+
+    Page pagePoke = await service.getPaginateResults(
+        "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0");
+
+    expect(pagePoke.next,
+        "https://pokeapi.co/api/v2/pokemon?offset=100&limit=100");
+
+    expect(pagePoke.results.length, 100);
+    expect(pagePoke.results[0].name, "bulbasaur");
   });
 
   test('Pokemon service can get raw pokemon by url', () async {
