@@ -11,7 +11,7 @@ class _PokemomListViewState extends State<PokemomListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Esta será a lista de Pokemons"),
+      child: Text("Lista de Pokemon"),
     );
   }
 }

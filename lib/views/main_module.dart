@@ -1,6 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pokedex/views/Pokemons/pokemon_list_home.dart';
+import 'package:pokedex/views/Pokemons/pokemon_list/pokemom_list.dart';
 import 'package:pokedex/views/main_widget.dart';
 
 class AppModule extends MainModule {
