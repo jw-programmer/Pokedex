@@ -69,17 +69,24 @@ mixin _$PokemomStore on _PokemomStoreBase, Store {
     });
   }
 
+  final _$fistFethAsyncAction = AsyncAction('_PokemomStoreBase.fistFeth');
+
+  @override
+  Future<void> fistFeth() {
+    return _$fistFethAsyncAction.run(() => super.fistFeth());
+  }
+
   final _$fethPageAsyncAction = AsyncAction('_PokemomStoreBase.fethPage');
 
   @override
-  Future fethPage(String url) {
+  Future<void> fethPage(String url) {
     return _$fethPageAsyncAction.run(() => super.fethPage(url));
   }
 
   final _$setPokemonAsyncAction = AsyncAction('_PokemomStoreBase.setPokemon');
 
   @override
-  Future setPokemon(String url) {
+  Future<void> setPokemon(String url) {
     return _$setPokemonAsyncAction.run(() => super.setPokemon(url));
   }
 

@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  loading: ^1.0.2
   dio: ^3.0.10
   flutter_modular: any
   flutter_mobx: ^1.1.0+2

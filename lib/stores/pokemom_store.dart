@@ -20,14 +20,27 @@ abstract class _PokemomStoreBase with Store {
 
   @observable
   bool isLoading = false;
+
   @action
-  void fethPage(String url) async {
-    this.actualPage =
-        await PokemonService.getInstance().getPaginateResults(url);
+  Future<void> fistFeth() async {
+    this.results = [];
+    await this.fethPage("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0");
   }
 
   @action
-  void setPokemon(String url) async {
+  Future<void> fethPage(String url) async {
+    this.isLoading = true;
+    try {
+      this.actualPage =
+          await PokemonService.getInstance().getPaginateResults(url);
+      this.results.addAll(this.actualPage.results);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  @action
+  Future<void> setPokemon(String url) async {
     this.isLoading = true;
     try {
       this.pokemon =
