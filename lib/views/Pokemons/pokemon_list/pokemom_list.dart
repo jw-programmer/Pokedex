@@ -16,14 +16,21 @@ class PokemomListView extends StatefulWidget {
 class _PokemomListViewState extends State<PokemomListView> {
   final store = Modular.get<PokemomStore>();
 
-  @override
-  void initState() {
-    super.initState();
-    store.fistFeth();
-  }
+  final ScrollController _scroll = new ScrollController();
 
   _updateList() async {
     await store.fethPage(store.actualPage.next);
+  }
+
+  @override
+  void initState() {
+    store.fistFeth();
+    _scroll.addListener(() {
+      if (_scroll.position.pixels == _scroll.position.maxScrollExtent) {
+        _updateList();
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -33,29 +40,12 @@ class _PokemomListViewState extends State<PokemomListView> {
         title: Text("Pokedex"),
       ),
       body: Observer(builder: (_) {
-        return store.isLoading
-            ? Center(
-                child: Loading(
-                  indicator: BallPulseIndicator(),
-                  size: 500.0,
-                  color: Colors.red,
-                ),
-              )
-            : ListView.builder(
-                itemCount: store.results.length,
-                itemBuilder: (context, index) {
-                  if (index == store.results.length) {
-                    _updateList();
-                    Center(
-                      child: Loading(
-                        indicator: BallPulseIndicator(),
-                        size: 500.0,
-                        color: Colors.red,
-                      ),
-                    );
-                  }
-                  return PokemonListCell(store.results[index]);
-                });
+        return ListView.builder(
+            controller: _scroll,
+            itemCount: store.results.length,
+            itemBuilder: (context, index) {
+              return PokemonListCell(store.results[index]);
+            });
       }),
     );
   }
