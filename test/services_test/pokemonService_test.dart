@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pokedex/exceptions/PokemonException.dart';
 import 'package:pokedex/models/Move.dart';
 import 'package:pokedex/models/Page.dart';
 
@@ -54,6 +55,21 @@ void main() {
 
     expect(photoUrl,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
+  });
+
+  test("Pokemon service can get pokemon by name", () async {
+    var service = PokemonService.getInstance();
+
+    Results result = await service.getPokemonByName("ditto");
+    expect(result.name, "ditto");
+    expect(result.url, "https://pokeapi.co/api/v2/pokemon/132");
+  });
+
+  test("Pokemon service can return Pokemon Exception", () async {
+    var service = PokemonService.getInstance();
+
+    expect(() => service.getPokemonByName("di"),
+        throwsA(isInstanceOf<PokemonException>()));
   });
 
   test('Move service can get moves object', () async {

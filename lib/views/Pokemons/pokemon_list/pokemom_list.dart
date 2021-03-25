@@ -5,6 +5,7 @@ import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 import 'package:pokedex/stores/pokemom_store.dart';
 import 'package:pokedex/views/Pokemons/pokemon_list/pokemom_cell.dart';
+import 'package:pokedex/views/Pokemons/pokemon_list/pokemom_list_search.dart';
 
 class PokemomListView extends StatefulWidget {
   PokemomListView({Key key}) : super(key: key);
@@ -43,6 +44,13 @@ class _PokemomListViewState extends State<PokemomListView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Pokedex"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: PokemomListSearch());
+              })
+        ],
       ),
       body: Observer(builder: (_) {
         if (store.isLoading && _fistTime) {

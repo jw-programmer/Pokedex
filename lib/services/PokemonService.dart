@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex/exceptions/PokemonException.dart';
 import 'package:pokedex/models/Page.dart';
 import 'package:pokedex/models/Pokemon.dart';
 
@@ -15,6 +16,18 @@ class PokemonService {
     return await Dio()
         .get(url)
         .then((Response response) => Pokemon.fromJson(response.data));
+  }
+
+  Future<Results> getPokemonByName(String name) async {
+    try {
+      var query = "https://pokeapi.co/api/v2/pokemon/$name";
+      return await Dio().get(query).then((Response response) => Results(
+          name: response.data['name'],
+          url: "https://pokeapi.co/api/v2/pokemon/${response.data["id"]}"));
+    } catch (e) {
+      throw new PokemonException(
+          "Erro de rede ou pokemon não localizado. Experimente usar o nome inteiro e em ingles.");
+    }
   }
 
   Future<Map<String, dynamic>> getRawPokemon(String url) async {
