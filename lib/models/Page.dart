@@ -1,7 +1,7 @@
 class Page {
   int count;
   String next;
-  Null previous;
+  String previous;
   List<Results> results;
 
   Page({this.count, this.next, this.previous, this.results});

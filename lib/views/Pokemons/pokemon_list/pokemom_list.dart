@@ -18,19 +18,24 @@ class _PokemomListViewState extends State<PokemomListView> {
 
   final ScrollController _scroll = new ScrollController();
 
-  _updateList() async {
-    await store.fethPage(store.actualPage.next);
-  }
+  bool _fistTime;
 
   @override
   void initState() {
     store.fistFeth();
+    super.initState();
+    _fistTime = true;
     _scroll.addListener(() {
       if (_scroll.position.pixels == _scroll.position.maxScrollExtent) {
-        _updateList();
+        store.fethPage(store.actualPage.next);
       }
     });
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,12 +45,33 @@ class _PokemomListViewState extends State<PokemomListView> {
         title: Text("Pokedex"),
       ),
       body: Observer(builder: (_) {
-        return ListView.builder(
-            controller: _scroll,
-            itemCount: store.results.length,
-            itemBuilder: (context, index) {
-              return PokemonListCell(store.results[index]);
-            });
+        if (store.isLoading && _fistTime) {
+          _fistTime = false;
+          return Center(
+            child: Loading(
+              indicator: BallPulseIndicator(),
+              size: 100,
+              color: Colors.red,
+            ),
+          );
+        } else {
+          return ListView.builder(
+              controller: _scroll,
+              itemCount: store.results.length + 1,
+              itemBuilder: (context, index) {
+                if (store.results.length == index) {
+                  return Center(
+                    child: Loading(
+                      indicator: BallPulseIndicator(),
+                      size: 50,
+                      color: Colors.red,
+                    ),
+                  );
+                } else {
+                  return PokemonListCell(store.results[index]);
+                }
+              });
+        }
       }),
     );
   }

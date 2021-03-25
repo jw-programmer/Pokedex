@@ -31,7 +31,9 @@ abstract class _PokemomStoreBase with Store {
   Future<void> fethPage(String url) async {
     this.isLoading = true;
     try {
-      print(url);
+      if (this.actualPage != null && this.actualPage.next == "") {
+        return;
+      }
       this.actualPage =
           await PokemonService.getInstance().getPaginateResults(url);
       this.results.addAll(this.actualPage.results);
