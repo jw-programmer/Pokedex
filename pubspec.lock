@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
+  expansion_card:
+    dependency: "direct main"
+    description:
+      name: expansion_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -197,6 +204,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.11"
+  flip_card:
+    dependency: "direct main"
+    description:
+      name: flip_card
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -249,13 +263,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
-  infinite_scroll_pagination:
-    dependency: "direct main"
-    description:
-      name: infinite_scroll_pagination
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.1"
   intl:
     dependency: transitive
     description:
@@ -415,13 +422,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  sliver_tools:
-    dependency: transitive
-    description:
-      name: sliver_tools
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   source_gen:
     dependency: transitive
     description:
@@ -521,5 +521,4 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.22.0"
+  dart: ">=2.12.0-0.0 <3.0.0"

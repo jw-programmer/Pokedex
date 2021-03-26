@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/stores/pokemom_store.dart';
+import 'package:pokedex/views/Pokemons/pokemon_detail/pokemom_detail.dart';
 import 'package:pokedex/views/Pokemons/pokemon_list/pokemom_list.dart';
 import 'package:pokedex/views/main_widget.dart';
 
@@ -16,6 +17,7 @@ class AppModule extends MainModule {
   // TODO: implement routers
   List<ModularRouter> get routers => [
         ModularRouter('/', child: (_, __) => PokemomListView()),
-        ModularRouter("/:id", child: (_, args) => args.params['id'])
+        ModularRouter("/:id",
+            child: (_, args) => PokemonDetail(args.params['id']))
       ];
 }

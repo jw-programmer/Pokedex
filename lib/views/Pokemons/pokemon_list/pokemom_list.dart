@@ -25,7 +25,6 @@ class _PokemomListViewState extends State<PokemomListView> {
   void initState() {
     store.fistFeth();
     super.initState();
-    _fistTime = true;
     _scroll.addListener(() {
       if (_scroll.position.pixels == _scroll.position.maxScrollExtent) {
         store.fethPage(store.actualPage.next);
@@ -53,7 +52,7 @@ class _PokemomListViewState extends State<PokemomListView> {
         ],
       ),
       body: Observer(builder: (_) {
-        if (store.isLoading && _fistTime) {
+        if ((store.isPageLoading && _fistTime) || store.isPokemonLoading) {
           _fistTime = false;
           return Center(
             child: Loading(

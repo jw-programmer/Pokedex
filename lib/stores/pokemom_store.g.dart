@@ -54,18 +54,34 @@ mixin _$PokemomStore on _PokemomStoreBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_PokemomStoreBase.isLoading');
+  final _$isPageLoadingAtom = Atom(name: '_PokemomStoreBase.isPageLoading');
 
   @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
+  bool get isPageLoading {
+    _$isPageLoadingAtom.reportRead();
+    return super.isPageLoading;
   }
 
   @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
+  set isPageLoading(bool value) {
+    _$isPageLoadingAtom.reportWrite(value, super.isPageLoading, () {
+      super.isPageLoading = value;
+    });
+  }
+
+  final _$isPokemonLoadingAtom =
+      Atom(name: '_PokemomStoreBase.isPokemonLoading');
+
+  @override
+  bool get isPokemonLoading {
+    _$isPokemonLoadingAtom.reportRead();
+    return super.isPokemonLoading;
+  }
+
+  @override
+  set isPokemonLoading(bool value) {
+    _$isPokemonLoadingAtom.reportWrite(value, super.isPokemonLoading, () {
+      super.isPokemonLoading = value;
     });
   }
 
@@ -96,7 +112,8 @@ mixin _$PokemomStore on _PokemomStoreBase, Store {
 actualPage: ${actualPage},
 results: ${results},
 pokemon: ${pokemon},
-isLoading: ${isLoading}
+isPageLoading: ${isPageLoading},
+isPokemonLoading: ${isPokemonLoading}
     ''';
   }
 }

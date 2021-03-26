@@ -19,7 +19,10 @@ abstract class _PokemomStoreBase with Store {
   Pokemon pokemon;
 
   @observable
-  bool isLoading = false;
+  bool isPageLoading = false;
+
+  @observable
+  bool isPokemonLoading = false;
 
   @action
   Future<void> fistFeth() async {
@@ -29,7 +32,7 @@ abstract class _PokemomStoreBase with Store {
 
   @action
   Future<void> fethPage(String url) async {
-    this.isLoading = true;
+    this.isPageLoading = true;
     try {
       if (this.actualPage != null && this.actualPage.next == "") {
         return;
@@ -38,18 +41,18 @@ abstract class _PokemomStoreBase with Store {
           await PokemonService.getInstance().getPaginateResults(url);
       this.results.addAll(this.actualPage.results);
     } finally {
-      this.isLoading = false;
+      this.isPageLoading = false;
     }
   }
 
   @action
   Future<void> setPokemon(String url) async {
-    this.isLoading = true;
+    this.isPokemonLoading = true;
     try {
       this.pokemon =
           await PokemonDirector.buildApiPokemom(PokemonApiBuilder(), url);
     } finally {
-      this.isLoading = false;
+      this.isPokemonLoading = false;
     }
   }
 }
