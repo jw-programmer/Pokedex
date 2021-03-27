@@ -23,29 +23,26 @@ class PokemonListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Row(
-        children: [
-          Text(this._result.name),
-          FutureBuilder<Image>(
-              future: _getImage(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return snapshot.data;
-                } else {
-                  return Loading(
-                    indicator: BallPulseIndicator(),
-                    size: 100.0,
-                    color: Colors.blue,
-                  );
-                }
-              })
-        ],
-      ),
+    return Card(
+        child: ListTile(
+      title: Text(this._result.name),
+      trailing: FutureBuilder<Image>(
+          future: _getImage(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data;
+            } else {
+              return Loading(
+                indicator: BallPulseIndicator(),
+                size: 100.0,
+                color: Colors.blue,
+              );
+            }
+          }),
       onTap: () async {
         await store.setPokemon(_result.url);
         Modular.to.pushNamed("/${store.pokemon.name}");
       },
-    );
+    ));
   }
 }
