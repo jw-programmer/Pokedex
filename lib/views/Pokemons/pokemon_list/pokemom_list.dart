@@ -19,7 +19,7 @@ class _PokemomListViewState extends State<PokemomListView> {
 
   final ScrollController _scroll = new ScrollController();
 
-  bool _fistTime;
+  bool _fistTime = true;
 
   @override
   void initState() {
