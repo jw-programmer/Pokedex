@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/stores/pokemom_store.dart';
 
-Widget ImageAndDescription(PokemomStore store) {
+Widget imageAndDescription(PokemomStore store) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     children: [
