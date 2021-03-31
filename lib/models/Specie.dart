@@ -74,13 +74,13 @@ class Specie {
     _hasGenderDifferences = json['has_gender_differences'];
     _formsSwitchable = json['forms_switchable'];
     if (json['flavor_text_entries'] != null) {
-      _flavorTextEntries = new List<FlavorTextEntries>();
+      _flavorTextEntries = [];
       json['flavor_text_entries'].forEach((v) {
         _flavorTextEntries.add(new FlavorTextEntries.fromJson(v));
       });
     }
     if (json['form_descriptions'] != null) {
-      _formDescriptions = new List<FormDescriptions>();
+      _formDescriptions = [];
       json['form_descriptions'].forEach((v) {
         _formDescriptions.add(new FormDescriptions.fromJson(v));
       });
