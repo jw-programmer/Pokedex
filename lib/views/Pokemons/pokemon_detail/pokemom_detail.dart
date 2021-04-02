@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/stores/pokemom_store.dart';
 import 'package:pokedex/views/Pokemons/pokemon_detail/pokemom_detail_pages/pokemom_image_descrpition.dart';
+import 'package:pokedex/views/Pokemons/pokemon_detail/pokemom_detail_pages/pokemom_stats_page.dart';
 import 'package:pokedex/views/Pokemons/pokemon_detail/pokemom_detail_pages/pokmom_moves_description.dart';
 
 class PokemonDetail extends StatelessWidget {
@@ -22,7 +23,11 @@ class PokemonDetail extends StatelessWidget {
         body: PageView(
           controller: _controller,
           scrollDirection: Axis.horizontal,
-          children: [imageAndDescription(store), movesPage(store)],
+          children: [
+            imageAndDescription(store),
+            movesPage(store),
+            statsPage(store)
+          ],
         ));
   }
 }
