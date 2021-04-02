@@ -45,7 +45,7 @@ Widget imageAndDescription(PokemomStore store) {
         ],
       ),
       Text(
-        "Informacao, Bio, de vários jogos e linguas",
+        "Informação, Bio, de vários jogos e línguas",
         style: TextStyle(fontSize: 25),
       ),
       Expanded(
